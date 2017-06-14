@@ -1,11 +1,7 @@
 # My_store折價卷
-- [系統功能](#系統功能頁面)
-- [MODEL設計](#model設計)
-- [技術運用(Gem)](#技術運用gem)
-- [實作](#開始實作)
-  - [Step.1 建立my_store專案](#step1-建立my_store專案)
-  - [Step.2 scaffold建立CRUD](#step2-scaffold建立product和coupon的crud)
-  - [Step.3 表單驗證](#step3-表單驗證)
+
+ 
+ 
 今天要做一個ruby的應用，建立一個書局，有商品、折價卷優惠等功能，主要是要讓商品輸入折價卷code後，會成功扣款，其中並加上表單的驗證處理
 
 **以概念性驗證(POC)的概念，以宏觀的角度去實踐系統**
@@ -15,7 +11,15 @@
   
     (自己真的常常這樣= =+ )
 
-
+- [系統功能](#系統功能頁面)
+- [MODEL設計](#model設計)
+- [技術運用(Gem)](#技術運用gem)
+- [實作](#開始實作)
+  - [Step.1 建立my_store專案](#step1-建立my_store專案)
+  - [Step.2 scaffold建立CRUD](#step2-scaffold建立product和coupon的crud)
+  - [Step.3 表單驗證](#step3-表單驗證)
+  
+  
 ## 系統功能(頁面)
  
  
@@ -61,6 +65,8 @@
 ## 技術運用(Gem)
   - simple_form
   - bootstrap
+> 備註：要先安裝這兩個套件~
+
 > 先加入這兩個gem後，再用`rails g scaffold`長出來的表單頁面，表單就會用`simple_form`自動生成喔~而且還變美美的!
 ## 開始實作~
 

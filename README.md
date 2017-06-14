@@ -63,9 +63,9 @@
   
 ### Step.2 scaffold建立product和coupon的CRUD
 `cd my_store`進入專案目錄後
-```js
-rails g scaffold product title price:integer description #建立書本管理
-rails g scaffold coupon code discount:integer begin_at:datetime end_at:datetime #建立折價卷管理
+```rails
+$rails g scaffold product title price:integer description #建立書本管理
+$rails g scaffold coupon code discount:integer begin_at:datetime end_at:datetime #建立折價卷管理
 ```
 ### Step.3 表單驗證
 我們的Produt的title和price要必填

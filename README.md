@@ -1,6 +1,13 @@
 # My_store折價卷
 
- 
+- [系統功能](#系統功能頁面)
+- [MODEL設計](#model設計)
+- [技術運用(Gem)](#技術運用gem)
+- [實作](#開始實作)
+  - [Step.1 建立my_store專案](#step1-建立my_store專案)
+  - [Step.2 加入gem套件](#step2-加入gem套件)
+  - [Step.3 scaffold建立CRUD](#step3-scaffold建立product和coupon的crud)
+  - [Step.4 表單驗證](#step4-表單驗證)
  
 今天要做一個ruby的應用，建立一個書局，有商品、折價卷優惠等功能，主要是要讓商品輸入折價卷code後，會成功扣款，其中並加上表單的驗證處理
 
@@ -11,14 +18,6 @@
   
     (自己真的常常這樣= =+ )
 
-- [系統功能](#系統功能頁面)
-- [MODEL設計](#model設計)
-- [技術運用(Gem)](#技術運用gem)
-- [實作](#開始實作)
-  - [Step.1 建立my_store專案](#step1-建立my_store專案)
-  - [Step.2 scaffold建立CRUD](#step2-scaffold建立product和coupon的crud)
-  - [Step.3 表單驗證](#step3-表單驗證)
-  
   
 ## 系統功能(頁面)
  
@@ -65,7 +64,7 @@
 ## 技術運用(Gem)
   - simple_form
   - bootstrap
-> 備註：要先安裝這兩個套件~
+> 備註：建議先安裝這兩個套件~
 
 > 先加入這兩個gem後，再用`rails g scaffold`長出來的表單頁面，表單就會用`simple_form`自動生成喔~而且還變美美的!
 ## 開始實作~
@@ -73,14 +72,38 @@
 ### Step.1 建立my_store專案
   `rails new my_store`
   
-  
-### Step.2 scaffold建立product和coupon的CRUD
+### Step.2 加入gem套件
+
+**[Bootstrap-sass](https://github.com/momo200e/Ruby_Rails_Notes/blob/master/Gem_Notes.md#bootstrap-sass) && [Simple_form](https://github.com/momo200e/Ruby_Rails_Notes/blob/master/Gem_Notes.md#simple_form)**
+
 `cd my_store`進入專案目錄後
+```ruby
+#Gemfile
+gem 'bootstrap-sass'
+gem 'simple_form'
+``` 
+終端機中執行`bundle install`
+
+```ruby
+#application.scss
+@import "bootstrap-sprockets";
+@import "bootstrap";
+#application.js
+//= require bootstrap
+``` 
+因為要搭配bootstrap使用，所以使用`rails generate simple_form:install --bootstrap`
+
+
+
+### Step.3 scaffold建立product和coupon的CRUD
+
 ```rails
 rails g scaffold product title price:integer description #建立書本管理
 rails g scaffold coupon code discount:integer begin_at:datetime end_at:datetime #建立折價卷管理
 ```
-### Step.3 表單驗證
+
+
+### Step.4 表單驗證
 我們的Produt的title和price要必填
 Coupon的discount要必填
 ```ruby

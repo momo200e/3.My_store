@@ -125,7 +125,21 @@ before_save :gemerate_code
 
 private
 def generate_code
-  self.code = SecureRandom.hex[1..8].upcase if code.empty?
+if self.code.empty?
+  self.code = SecureRandom.hex[1..8].upcase
+else
+  self.code = code.upcase
 end
 ```
-我們要定義一個`generate_code`
+我們要定義一個`generate_code`，判斷使用者有沒有輸入折扣代碼，若沒有則系統產生，其中`.upcase`用來將字串轉大寫，
+
+### Step.6 商品完成折扣
+首先，要先在商品加入一個`input`，讓使用者可以輸入折扣代碼
+```ruby
+#product/show.html.erb
+<%= form_for @product do |f| %>
+
+<% end %>
+```
+
+### Step.7 練習新增欄位

@@ -109,18 +109,18 @@ rails g scaffold coupon code discount:integer begin_at:datetime end_at:datetime 
         
 Coupon的discount要必填，且大於0
 ```ruby
-//Product.rb
+#Product.rb
 validates :title, presence: true
 validates :price, presence: true, numericality: {greater_than: 0}
 ```
 ```ruby
-//Coupon.rb
+#Coupon.rb
 validates :discount, presence: true, numericality: {greater_than: 0}
 ```
 ### Step.5 自動產生折扣代碼
 當新增、修改時，折扣代碼未輸入的話，我們希望幫使用者產生一串代碼
 ```ruby
-//Coupon.rb
+#Coupon.rb
 before_save :gemerate_code
 
 private

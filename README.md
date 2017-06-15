@@ -1,4 +1,4 @@
-# My_store折價卷
+# My_store折價卷a
 
 - [系統功能](#系統功能頁面)
 - [MODEL設計](#model設計)

@@ -110,11 +110,15 @@ rails g scaffold coupon code discount:integer begin_at:datetime end_at:datetime 
 Coupon的discount要必填，且大於0
 ```ruby
 #Product.rb
+belongs_to :coupon
 validates :title, presence: true
 validates :price, presence: true, numericality: {greater_than: 0}
 ```
+為了確保`coupon`的唯一性uniqueness: true
 ```ruby
 #Coupon.rb
+has_many :products
+validates :code, uniqueness: true
 validates :discount, presence: true, numericality: {greater_than: 0}
 ```
 ### Step.5 自動產生折扣代碼
@@ -135,12 +139,54 @@ end
 我們要定義一個`generate_code`，判斷使用者有沒有輸入折扣代碼，若沒有則系統產生，其中`.upcase`用來將字串轉大寫，
 
 ### Step.6 商品完成折扣
-首先，要先在商品加入一個`input`，讓使用者可以輸入折扣代碼
+首先，要先在商品加入一個`input`，讓使用者可以輸入折扣代碼，送出後需要有一個`path`路徑，所以routes要新增路徑
+
+```ruby
+#routes.rb
+resources :products do
+  member do 
+    get :apply_coupon
+  end
+end
+```
+因為要送出書的`ID`，所以要用`member`
 ```ruby
 #product/show.html.erb
-<%= form_for @product do |f| %>
-
+<%= simple_form_for @product, url: apply_coupon_product_path(@product) do |f| %>
+  <%= f.input :coupon %>
+  <%= f.submit 'use coupon' %>
 <% end %>
 ```
 
+```ruby
+#products_controller.html.erb
+def apply_coupon
+  coupon = Coupon.find_by(code: params[:product][:code])
+  if coupon
+    @product.apply_coupon(coupon)
+  else
+    redirect_to products_path, notice: "找不到折價卷代碼"
+  end
+end
+```
+
+```ruby
+#Coupon.rb
+def coupon.is_available?
+  (begin_at < Time.now.beginning_of_day) && (end_at > Time.now.end_of_day)
+end
+```
+
+```ruby
+#Product.rb
+def apply_coupon(coupon)
+  if coupon.is_available?
+    self.price -= coupon.discount
+    self.price = 0 if self.price < 0
+  else
+    errors[:coupon] << "此折價卷不再有效期限內"
+  end
+end
+```
 ### Step.7 練習新增欄位
+未完待續。。。

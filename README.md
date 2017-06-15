@@ -104,10 +104,28 @@ rails g scaffold coupon code discount:integer begin_at:datetime end_at:datetime 
 
 
 ### Step.4 表單驗證
-我們的Produt的title和price要必填
-Coupon的discount要必填
+
+我們的Produt的title和price要必填，price要大於0
+        
+Coupon的discount要必填，且大於0
 ```ruby
-//
-rails g scaffold product title price:integer description //建立書本管理
-rails g scaffold coupon code discount:integer begin_at:datetime end_at:datetime //建立折價卷管理
+//Product.rb
+validates :title, presence: true
+validates :price, presence: true, numericality: {greater_than: 0}
 ```
+```ruby
+//Coupon.rb
+validates :discount, presence: true, numericality: {greater_than: 0}
+```
+### Step.5 自動產生折扣代碼
+當新增、修改時，折扣代碼未輸入的話，我們希望幫使用者產生一串代碼
+```ruby
+//Coupon.rb
+before_save :gemerate_code
+
+private
+def generate_code
+  self.code = SecureRandom.hex[1..8].upcase if code.empty?
+end
+```
+我們要定義一個`generate_code`

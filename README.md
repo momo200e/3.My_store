@@ -1,9 +1,9 @@
 # My_store折價卷
 
 >本章的學習目標：
->-  資料驗證|必填、大於0、唯一性(presence,numericality: {greater_than: 0}, uniqueness)
+>-  資料驗證|必填、大於0、唯一性
 >-  新增欄位add_column(資料表名稱要加s)
->
+>-  日期的判斷
 
 
 - [系統功能](#系統功能頁面)
